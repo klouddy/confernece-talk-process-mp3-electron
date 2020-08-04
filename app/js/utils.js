@@ -1,4 +1,5 @@
 const NodeID3 = require('node-id3')
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 module.exports = {
   processFile: function (fileName) {
     let tags = NodeID3.read(fileName);
@@ -38,5 +39,23 @@ module.exports = {
       }
     }
     return row;
+  },
+  createCsvFile: function (data, pathToFile) {
+    const csvWriter = createCsvWriter({
+      path: pathToFile,
+      header: [
+        {id: 'conferenceName', title: 'Conference'},
+        {id: 'speaker', title: 'Speaker'},
+        {id: 'title', title: 'Title'},
+        {id: 'year', title: 'Year'},
+        {id: 'fileName', title: 'FileName'},
+        {id: 'url', title: 'URL'}
+      ]
+    });
+
+    csvWriter.writeRecords(data)       // returns a promise
+    .then(() => {
+      console.log('...Done');
+    });
   }
 }

@@ -1,40 +1,28 @@
 language: node_js
-
-
 node_js:
-  - '11.6.0'
-
-# Always run two parallel builds: one on mac and one on linux
-# the linux build will use wine to be able to build windows and
-# linux apps
+  - 11.6.0
 matrix:
   include:
     - os: osx
       osx_image: xcode10.2
       language: node_js
-      node_js: "11.6.0"
+      node_js: 11.6.0
       env:
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-
     - os: linux
       dist: trusty
       sudo: required
       services: docker
       language: generic
-
 notifications:
   email: false
-
-# cache some files for faster builds
 cache:
   yarn: true
   directories:
     - node_modules
-    - $HOME/.cache/electron
-    - $HOME/.cache/electron-builder
-
-# add git lfs for large file support
+    - "$HOME/.cache/electron"
+    - "$HOME/.cache/electron-builder"
 before_install:
   - |
     if [ "$TRAVIS_OS_NAME" == "osx" ]; then
@@ -43,8 +31,6 @@ before_install:
     fi
 before_script:
   - git lfs pull
-
-# on PRs and merges to master and prod run tests and build the app
 script:
   - |
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
@@ -57,20 +43,17 @@ script:
     else
       yarn test
     fi
-# only deploy to github on a merge to the prod branch
-deploy:
-  provider: script
-  script: bash deploy.travis.sh
-  skip_cleanup: true
-  on:
-    branch: master
-
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
-
-# only run this script on pull requests and merges into
-# the 'master' and 'prod' branches
 branches:
   only:
     - master
     - prod
+deploy:
+  provider: releases
+  api_key:
+    secure: pZ96EklvK/3bhkQzdKaLpi9RgpIydn8Dr3eckNsUJhMsZFli/apSuQUIRZ2GKbiBqLyDbySvtp3vZzrd44vAcGuCxrK5S+uYBhIIbS1sq9+N+O6SMWdYXZVG43C5DerGdwF9+GS16RX2EI0iOLI7vvZrVepHiJAQTjK4s2QjBqP13D3wqtFQgYN5uwMMiTuNIXr+1QU/srrLX9E6m4zrl15p3tiygFPphSoQBtTsMNMXfB2At2CEEaVCElxuDss3hB6VAqhbopYuv9+yPZwvB/bqdj8KS6O7T6xyQNqc1NGtf00CcFvNV5cK7pEpIkvdOhJvOxHrPpvvxbVg219k8Ms0OsbYCAfbYHCFnh4pGinMtN4K2P0CMsnFD3hJeOQFDt3MP7Eo0s2Q0VYHEYISW2qRr7IdTq9PmgjruDBf+lJSBuvByM2ExRheNV7PYQtid8LM0qF9Qtr80SABuAoXoJ3OxU2OxKWLtcckbGOclmwHZa4aRoMxftoE8jg98zlL9g3D7fl4dD93HkURTaNbNa/STrhE8OFUBGYIfcZhdb0nBTYzfSZB38jrlW8S8+SxTfp02BYw4v2lsbYD28NDEOIuTfbvgQdrso2iygEzIFBRfYo4KQJ9MKgxh1k6il+LlwfcqM2OdVOy0NQ7SnwM8KuITr/6+GPV+/rG8ApxgTs=
+  file: 'dist/*'
+  on:
+    repo: klouddy/confernece-talk-process-mp3-electron
+  skip_cleanup: 'true'

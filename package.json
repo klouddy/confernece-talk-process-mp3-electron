@@ -13,7 +13,8 @@
   "scripts": {
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "test": "echo 'test'"
+    "test": "echo 'test'",
+    "release": "electron-builder --publish always"
   },
   "dependencies": {
     "csv-writer": "^1.6.0",

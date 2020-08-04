@@ -7,9 +7,20 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^9.1.2"
+    "electron": "^9.1.2",
+    "electron-builder": "^22.8.0"
+  },
+  "scripts": {
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "dependencies": {
     "node-id3": "^0.1.18"
+  },
+  "build": {
+    "appId": "com.kloudd.conf-mp3-process",
+    "mac": {
+      "category": "audio"
+    }
   }
 }

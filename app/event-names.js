@@ -1,5 +1,8 @@
 module.exports = {
   CLEAR_CSV_DATA: 'CLEAR_CSV_DATA',
   CSV_UPDATED: 'CSV_UPDATED',
-  CHOOSE_FILES: 'choose-files-to-process'
+  CHOOSE_FILES: 'choose-files-to-process',
+  EXPORT_CSV: 'EXPORT_CSV_FILE',
+  LOADING_START: 'LOADING_START',
+  LOADING_END: 'LOADING_END'
 }

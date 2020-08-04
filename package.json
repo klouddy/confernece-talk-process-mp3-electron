@@ -12,7 +12,8 @@
   },
   "scripts": {
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "test": "echo 'test'"
   },
   "dependencies": {
     "node-id3": "^0.1.18"

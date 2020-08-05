@@ -3,7 +3,6 @@
 const path = require('path');
 
 var ipcRenderer = require('electron').ipcRenderer;
-var EVENTS = require(path.resolve('app/event-names'));
 
 var myButton = document.querySelector("#mybutton")
 var tbody = document.querySelector("#data-table")
@@ -12,19 +11,19 @@ var exportButton = document.querySelector("#export-button")
 
 myButton.addEventListener('click', function () {
   console.log('clicked button');
-  ipcRenderer.send(EVENTS.CHOOSE_FILES, '');
+  ipcRenderer.send('choose-files-to-process', '');
 })
 
 exportButton.addEventListener('click', function () {
-  ipcRenderer.send(EVENTS.EXPORT_CSV, '');
+  ipcRenderer.send('EXPORT_CSV_FILE', '');
 })
 
 clearButton.addEventListener('click', () => {
   console.log("clicked clear button")
-  ipcRenderer.send(EVENTS.CLEAR_CSV_DATA, '');
+  ipcRenderer.send('CLEAR_CSV_DATA', '');
 })
 
-ipcRenderer.on(EVENTS.CSV_UPDATED, (event, data) => {
+ipcRenderer.on('CSV_UPDATED', (event, data) => {
   console.log("event", event);
   console.log('data', data);
   if (data && data.length>0) {

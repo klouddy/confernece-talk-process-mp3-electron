@@ -8,7 +8,9 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^9.1.2",
-    "electron-builder": "^22.8.0"
+    "electron-builder": "^22.8.0",
+    "electron-packager": "^15.0.0",
+    "electron-wix-msi": "^2.2.0"
   },
   "scripts": {
     "pack": "electron-builder --dir",

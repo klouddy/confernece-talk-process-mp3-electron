@@ -58,3 +58,4 @@ deploy:
   on:
     repo: klouddy/confernece-talk-process-mp3-electron
   skip_cleanup: 'true'
+  draft: true

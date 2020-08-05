@@ -39,7 +39,7 @@ script:
         -v ~/.cache/electron:/root/.cache/electron \
         -v ~/.cache/electron-builder:/root/.cache/electron-builder \
         electronuserland/builder:wine \
-        /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn release"
+        /bin/bash -c "yarn --link-duplicates --pure-lockfile && yarn test"
     else
       yarn release
     fi
@@ -51,8 +51,9 @@ branches:
     - prod
 deploy:
   provider: releases
-  api_key: "8f5fd6dc02cf011ae061f63f5e6eb20f131a9c44"
-  file: "*.snap"
+  api_key:
+    secure: A9pyy8T5q5K+/+IiiIpwrzA7O+WOApylaHxPSdp3D8Hl5KyZ2cjFeAoxcaiDnQfpt9AV/VJAa7nOYGUoNW/EezkgKRGcInSFK8jQp1ixKLuaY1HTqJOIY+O1GCxWsPgX1nDlWBHbh0cuPJ2ma1LBgY/KaANZt688f75hmuqejJEvjEA+0QGMk9PX8XoWIOdJhWnz05vIEWzqE3dP4swI2SqB7QlbNITx4Pv6rD1s+ycQf2VvDI4B42iA3GkBep0SsLV1IQsCJDleENx1mVv8BewOk0RihKmI1cxkNv8KbSqFctqic2Jlv8FjffQ9//3G86eqerqbwvpIK6PkxlUSxb1sHFLQiWBr8jTJwwVkT8eJngUenZa5D5pkmA3uYva0UGWAYLfaqCxDkNWKsO0FoCg3JjJP3zBTUjwlUah5WqNLodCUs9CxnR1mMkU2QbORws+dpLypFri8QK3q2DZbgW5tm0dXsSMzfkDyZ9Sikz4cqe0XGfGYd/sZcIwHxp+dfHWB6zDsA+YjqWnQI5mhROnRA+VlgjMmHAGM0GO7X36R6un3i/AupJjEKSMVv0FPjFTWKVWUIu0H4sCq8tV6GyeOTaxhzxhfO3zboQcZs++dBRs03JAXIJu+z4Uvn4X39Gsg/BCaW4ktFL5hEgx6uuLpjF2FuLO8XydPwzypLEQ=
+  file: 'dist/*'
   file_glob: true
   on:
     repo: klouddy/confernece-talk-process-mp3-electron

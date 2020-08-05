@@ -8,6 +8,7 @@ var myButton = document.querySelector("#mybutton")
 var tbody = document.querySelector("#data-table")
 var clearButton = document.querySelector("#clear-button")
 var exportButton = document.querySelector("#export-button")
+var urlPrefixInput = document.querySelector("#url-prefix")
 
 myButton.addEventListener('click', function () {
   console.log('clicked button');
@@ -15,7 +16,7 @@ myButton.addEventListener('click', function () {
 })
 
 exportButton.addEventListener('click', function () {
-  ipcRenderer.send('EXPORT_CSV_FILE', '');
+  ipcRenderer.send('EXPORT_CSV_FILE', {urlPrefix: urlPrefixInput.value});
 })
 
 clearButton.addEventListener('click', () => {

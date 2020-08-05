@@ -20,11 +20,12 @@ function createWindow() {
 }
 
 ipcMain.on('EXPORT_CSV_FILE', (event, args) => {
-  console.log('export csv');
+  console.log('export csv', args);
+  let dataToExport = appUtils.addUrl(csvData.csvData, args.urlPrefix);
   dialog.showSaveDialog({})
   .then(results => {
     console.log('results to save file', results);
-    appUtils.createCsvFile(csvData.csvData, results.filePath);
+    appUtils.createCsvFile(dataToExport, results.filePath);
 
   }).catch(err => {
     dialog.showErrorBox("Error", err);

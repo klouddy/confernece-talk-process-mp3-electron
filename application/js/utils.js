@@ -1,12 +1,24 @@
 const NodeID3 = require('node-id3')
+const path = require('path');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 module.exports = {
   processFile: function (fileName) {
     let tags = NodeID3.read(fileName);
     console.log('tags', tags);
     let row = this.convertTags(tags);
-    row.fileName = fileName;
+    row.fileName = path.basename(fileName);
     return row;
+  },
+  addUrl: function (data, urlPrefix) {
+    let updatedData = [];
+    data.forEach(line => {
+      if (!urlPrefix.endsWith('/')) {
+        urlPrefix += '/'
+      }
+      line.url = urlPrefix + line.fileName.replace(/ /g, '+');
+      updatedData.push(line);
+    });
+    return updatedData;
   },
 
   convertTags: function (tags) {

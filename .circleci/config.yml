@@ -1,10 +1,12 @@
 version: 2.1
-build_windows:
-  docker:
-    - image: electronuserland/builder:wine
-  steps:
-    - checkout
-    - run: yarn && yarn release --win
+jobs:
+
+  build_windows:
+    docker:
+      - image: electronuserland/builder:wine
+    steps:
+      - checkout
+      - run: yarn && yarn release --win
 
   build_macos:
     macos:

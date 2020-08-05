@@ -49,14 +49,12 @@ branches:
   only:
     - master
     - prod
-before_deploy:
-  - export RELEASE_PKG_FILE=$(ls *.snap)
-  - echo "deploying $RELEASE_PKG_fILE to Github releases"
 deploy:
   provider: releases
   api_key:
     secure: Rt5nDzR1736bjo0tHFZjxcdBiKF80SZ1K8YRnMaUg/EpWPkqhEl+ifArto+S9OKasB8fB2oRT/a4Su6pJMnNmC22SCGiX7bPZ2zEunzmJ0nm6YavrVuJUbLU+Hax/ohSK6jW+VtcQKXRbaWF1sxosjmZACooiiiqX1EVBHuz90gid4TGCGt8YGhMkcxULZaI65wRzlzFRc+/ttzp9Sv/+e0Lkf48AlbZUGxhGhT6xFzCF0f8GYPTelF+xhqPxMFpnkHpl0u4ln4jYeb6e87G35TaQMrmDKGTX2HCIZ6I2M49uUKWJhScdyt7cVb2UnFFUuaF7qzYv62WHO7KddBF4WonoWpUz/XwZX8toI9optdgMNkuOq4vaPDa7AJCdaxIVVx4YIBG+qdrzBiJ2n2/J978Uauh/0X7tz6t2vERBvy2MZQBKnLhVQEl+Gabae+kTvitHnaPTF/PTlXAvMBzpYpZBNFoD2UTu59I9l3zgBUo8y7Ox4BBn9dyLZ8EvZPsm8/wv4yMhr6qrsB1jvmuMQl08sl61L4TPZjgxiabkllB6y+R4rQHh2HXrcvqIDFUbUvtRdjAWp1+u4lMc1ibjMpt8IaSNrrW2giepsfCt652G1EB37g1uQoAmrtP5coBAfx4cA+bhAhjGTz1B2ZtvaSRBUv/lQXMnGl3d4sye4U=
-  file: "${RELEASE_PKG_FILE}"
+  file: "*.snap"
+  file_glob: true
   on:
     repo: klouddy/confernece-talk-process-mp3-electron
   skip_cleanup: 'true'

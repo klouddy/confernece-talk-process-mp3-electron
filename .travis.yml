@@ -51,7 +51,7 @@ branches:
     - prod
 deploy:
   provider: releases
-  api_key: "${apikey}"
+  api_key: "8f5fd6dc02cf011ae061f63f5e6eb20f131a9c44"
   file: "*.snap"
   file_glob: true
   on:

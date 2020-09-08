@@ -3,6 +3,10 @@ const ProgressBar = require('electron-progressbar');
 const appUtils = require('./application/js/utils');
 const csvData = require('./application/js/store');
 
+const templateTxt = "<div class=\"item-365-audio\"><strong>Speaker: {{speaker}}</strong></div>\n"
+    + "<h3>Listen Now</h3>\n"
+    + "<p>[audio mp3=\"{{url}}\"][/audio]</p>"
+
 function createWindow() {
 
   // Create the browser window.
@@ -22,6 +26,7 @@ function createWindow() {
 ipcMain.on('EXPORT_CSV_FILE', (event, args) => {
   console.log('export csv', args);
   let dataToExport = appUtils.addUrl(csvData.csvData, args.urlPrefix);
+  dataToExport = appUtils.addBody(dataToExport, args.templateText);
   dialog.showSaveDialog({})
   .then(results => {
     console.log('results to save file', results);

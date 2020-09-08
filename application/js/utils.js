@@ -20,6 +20,20 @@ module.exports = {
     });
     return updatedData;
   },
+  addBody: function (data, templateText) {
+    let updatedData = [];
+    data.forEach(line => {
+      let txt = templateText;
+      txt = txt.replace(/{{url}}/g, line.url);
+      txt = txt.replace(/{{speaker}}/g, line.speaker);
+      txt = txt.replace(/{{title}}/g, line.speaker);
+      txt = txt.replace(/{{conferenceName}}/g, line.conferenceName);
+      txt = txt.replace(/{{year}}/g, line.year);
+      line.body = txt;
+      updatedData.push(line);
+    });
+    return data;
+  },
 
   convertTags: function (tags) {
     let row = {
@@ -28,7 +42,8 @@ module.exports = {
       year: '',
       title: '',
       fileName: '',
-      url: ''
+      url: '',
+      body: ''
     };
     if (tags) {
 
@@ -61,7 +76,8 @@ module.exports = {
         {id: 'title', title: 'Title'},
         {id: 'year', title: 'Year'},
         {id: 'fileName', title: 'FileName'},
-        {id: 'url', title: 'URL'}
+        {id: 'url', title: 'URL'},
+        {id: 'body', title: 'Body'}
       ]
     });
 

@@ -9,6 +9,7 @@ var tbody = document.querySelector("#data-table")
 var clearButton = document.querySelector("#clear-button")
 var exportButton = document.querySelector("#export-button")
 var urlPrefixInput = document.querySelector("#url-prefix")
+var templateTextArea = document.querySelector("#template-body")
 
 myButton.addEventListener('click', function () {
   console.log('clicked button');
@@ -16,7 +17,10 @@ myButton.addEventListener('click', function () {
 })
 
 exportButton.addEventListener('click', function () {
-  ipcRenderer.send('EXPORT_CSV_FILE', {urlPrefix: urlPrefixInput.value});
+  ipcRenderer.send('EXPORT_CSV_FILE', {
+    urlPrefix: urlPrefixInput.value,
+    templateText: templateTextArea.value
+  });
 })
 
 clearButton.addEventListener('click', () => {
